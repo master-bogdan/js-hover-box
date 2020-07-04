@@ -47,29 +47,21 @@ function setRandomColor() {
     return randomColor;
 }
 
-// function resetColor(element) {
-    
-// }
+function setItemColor(e) {
+    for (let i = 0; i < boxes.length; i++) {
+        setTimeout(() => {
+            boxes[i].style.background = setRandomColor();
+        }, 200 * (i + 1));
+    }
+}
 
-function setItemColor() {
-    boxes.forEach((item, index) => {
-        item.addEventListener('mouseenter', (e) => {
-            if (item == e.target) {
-                item.style.background = setRandomColor();
-                console.log(item.children);
-                setTimeout(setRandomColor(item), 200 * index+1);
-            }
-        });
-        item.addEventListener('mouseleave', (e) => {
-            item.style.background = '';
-        });
+function resetColor() {
+    boxes.forEach(item => {
+        item.style.background = '';
     });
 }
 
-setItemColor();
-
-
-// boxes.forEach(item => {
-//     item.addEventListener('mouseenter', setItemColor());
-//     item.addEventListener('mouseleave', resetColor());
-// });
+boxes.forEach(item => {
+    item.addEventListener('mouseenter', setItemColor, true);
+    item.addEventListener('mouseleave', resetColor, true);
+});
